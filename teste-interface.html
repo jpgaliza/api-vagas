@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Teste da API de Vagas</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .container {
+        margin: 20px 0;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+      .form-group {
+        margin: 15px 0;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+      input,
+      textarea,
+      select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+      button {
+        background: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin: 5px;
+      }
+      button:hover {
+        background: #0056b3;
+      }
+      .result {
+        margin: 20px 0;
+        padding: 15px;
+        border-radius: 4px;
+        white-space: pre-wrap;
+      }
+      .success {
+        background: #d4edda;
+        border: 1px solid #c3e6cb;
+        color: #155724;
+      }
+      .error {
+        background: #f8d7da;
+        border: 1px solid #f5c6cb;
+        color: #721c24;
+      }
+      .info {
+        background: #d1ecf1;
+        border: 1px solid #bee5eb;
+        color: #0c5460;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🔧 Teste da API de Vagas</h1>
+
+    <!-- Teste de Conexão -->
+    <div class="container">
+      <h2>1. Teste de Conexão</h2>
+      <button onclick="testarConexao()">Testar Conexão com BD</button>
+      <button onclick="listarVagas()">Listar Vagas (GET)</button>
+      <div id="conexao-result" class="result" style="display: none"></div>
+    </div>
+
+    <!-- Criar Vaga -->
+    <div class="container">
+      <h2>2. Criar Nova Vaga (POST)</h2>
+      <form id="vaga-form">
+        <div class="form-group">
+          <label for="titulo">Título*:</label>
+          <input
+            type="text"
+            id="titulo"
+            name="titulo"
+            required
+            placeholder="Ex: Desenvolvedor PHP"
+          />
+        </div>
+        <div class="form-group">
+          <label for="descricao">Descrição*:</label>
+          <textarea
+            id="descricao"
+            name="descricao"
+            required
+            placeholder="Descreva a vaga..."
+          ></textarea>
+        </div>
+        <div class="form-group">
+          <label for="empresa">Empresa*:</label>
+          <input
+            type="text"
+            id="empresa"
+            name="empresa"
+            required
+            placeholder="Nome da empresa"
+          />
+        </div>
+        <div class="form-group">
+          <label for="localizacao">Localização:</label>
+          <input
+            type="text"
+            id="localizacao"
+            name="localizacao"
+            placeholder="Ex: São Paulo - SP"
+          />
+        </div>
+        <div class="form-group">
+          <label for="salario">Salário:</label>
+          <input
+            type="number"
+            id="salario"
+            name="salario"
+            step="0.01"
+            placeholder="Ex: 5000.00"
+          />
+        </div>
+        <div class="form-group">
+          <label for="tipo_contrato">Tipo de Contrato:</label>
+          <select id="tipo_contrato" name="tipo_contrato">
+            <option value="">Selecione...</option>
+            <option value="CLT">CLT</option>
+            <option value="PJ">PJ</option>
+            <option value="Estágio">Estágio</option>
+            <option value="Temporário">Temporário</option>
+            <option value="Freelance">Freelance</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="requisitos">Requisitos:</label>
+          <textarea
+            id="requisitos"
+            name="requisitos"
+            placeholder="Ex: PHP, MySQL, HTML, CSS..."
+          ></textarea>
+        </div>
+        <div class="form-group">
+          <label for="beneficios">Benefícios:</label>
+          <textarea
+            id="beneficios"
+            name="beneficios"
+            placeholder="Ex: Vale alimentação, Plano de saúde..."
+          ></textarea>
+        </div>
+        <button type="submit">Criar Vaga (POST)</button>
+      </form>
+      <div id="criar-result" class="result" style="display: none"></div>
+    </div>
+
+    <!-- Candidatura -->
+    <div class="container">
+      <h2>3. Candidatar-se a uma Vaga (POST)</h2>
+      <form id="candidatura-form">
+        <div class="form-group">
+          <label for="vaga_id">ID da Vaga*:</label>
+          <input
+            type="number"
+            id="vaga_id"
+            name="vaga_id"
+            required
+            placeholder="Ex: 1"
+          />
+        </div>
+        <div class="form-group">
+          <label for="nome_candidato">Nome*:</label>
+          <input
+            type="text"
+            id="nome_candidato"
+            name="nome_candidato"
+            required
+            placeholder="Seu nome completo"
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">Email*:</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            placeholder="seu@email.com"
+          />
+        </div>
+        <div class="form-group">
+          <label for="telefone">Telefone:</label>
+          <input
+            type="text"
+            id="telefone"
+            name="telefone"
+            placeholder="(11) 99999-9999"
+          />
+        </div>
+        <div class="form-group">
+          <label for="curriculo">Currículo/Experiência:</label>
+          <textarea
+            id="curriculo"
+            name="curriculo"
+            placeholder="Descreva sua experiência..."
+          ></textarea>
+        </div>
+        <button type="submit">Candidatar-se (POST)</button>
+      </form>
+      <div id="candidatura-result" class="result" style="display: none"></div>
+    </div>
+
+    <script>
+      // Função para mostrar resultado
+      function mostrarResultado(elementId, data, tipo = "info") {
+        const element = document.getElementById(elementId);
+        element.style.display = "block";
+        element.className = `result ${tipo}`;
+        element.textContent = JSON.stringify(data, null, 2);
+      }
+
+      // Testar conexão
+      function testarConexao() {
+        fetch("test-db.php")
+          .then((response) => response.json())
+          .then((data) =>
+            mostrarResultado(
+              "conexao-result",
+              data,
+              data.status === "success" ? "success" : "error"
+            )
+          )
+          .catch((error) =>
+            mostrarResultado("conexao-result", { erro: error.message }, "error")
+          );
+      }
+
+      // Listar vagas
+      function listarVagas() {
+        fetch("vagas.php")
+          .then((response) => response.json())
+          .then((data) =>
+            mostrarResultado(
+              "conexao-result",
+              data,
+              data.sucesso ? "success" : "error"
+            )
+          )
+          .catch((error) =>
+            mostrarResultado("conexao-result", { erro: error.message }, "error")
+          );
+      }
+
+      // Criar vaga
+      document
+        .getElementById("vaga-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const formData = new FormData(this);
+          const data = {};
+
+          formData.forEach((value, key) => {
+            if (value) {
+              data[key] = key === "salario" ? parseFloat(value) : value;
+            }
+          });
+
+          fetch("vagas.php", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              mostrarResultado(
+                "criar-result",
+                data,
+                data.sucesso ? "success" : "error"
+              );
+              if (data.sucesso) {
+                document.getElementById("vaga-form").reset();
+              }
+            })
+            .catch((error) =>
+              mostrarResultado("criar-result", { erro: error.message }, "error")
+            );
+        });
+
+      // Candidatar-se
+      document
+        .getElementById("candidatura-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const formData = new FormData(this);
+          const data = {};
+
+          formData.forEach((value, key) => {
+            if (value) {
+              data[key] = key === "vaga_id" ? parseInt(value) : value;
+            }
+          });
+
+          fetch("candidaturas.php", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              mostrarResultado(
+                "candidatura-result",
+                data,
+                data.sucesso ? "success" : "error"
+              );
+              if (data.sucesso) {
+                document.getElementById("candidatura-form").reset();
+              }
+            })
+            .catch((error) =>
+              mostrarResultado(
+                "candidatura-result",
+                { erro: error.message },
+                "error"
+              )
+            );
+        });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,163 @@
+{
+    "info": {
+        "name": "API de Vagas",
+        "description": "Coleção de testes para a API de Vagas",
+        "version": "1.0.0"
+    },
+    "item": [
+        {
+            "name": "Vagas",
+            "item": [
+                {
+                    "name": "Listar todas as vagas",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost/api-vagas/vagas",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "path": ["api-vagas", "vagas"]
+                        }
+                    }
+                },
+                {
+                    "name": "Buscar vaga por ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost/api-vagas/vagas/1",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "path": ["api-vagas", "vagas", "1"]
+                        }
+                    }
+                },
+                {
+                    "name": "Criar nova vaga",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"titulo\": \"Desenvolvedor PHP\",\n    \"descricao\": \"Desenvolvimento de aplicações web em PHP\",\n    \"empresa\": \"Empresa XYZ\",\n    \"localizacao\": \"São Paulo - SP\",\n    \"salario\": 7000.00,\n    \"tipo_contrato\": \"CLT\",\n    \"requisitos\": \"PHP, MySQL, HTML, CSS, JavaScript\",\n    \"beneficios\": \"Vale alimentação, Plano de saúde\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost/api-vagas/vagas",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "path": ["api-vagas", "vagas"]
+                        }
+                    }
+                },
+                {
+                    "name": "Atualizar vaga",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"titulo\": \"Desenvolvedor PHP Sênior\",\n    \"descricao\": \"Desenvolvimento de aplicações web complexas em PHP\",\n    \"empresa\": \"Empresa XYZ\",\n    \"localizacao\": \"São Paulo - SP\",\n    \"salario\": 9000.00,\n    \"tipo_contrato\": \"CLT\",\n    \"requisitos\": \"PHP avançado, MySQL, Laravel, Git\",\n    \"beneficios\": \"Vale alimentação, Plano de saúde, Vale transporte\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost/api-vagas/vagas/1",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "path": ["api-vagas", "vagas", "1"]
+                        }
+                    }
+                },
+                {
+                    "name": "Remover vaga",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost/api-vagas/vagas/1",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "path": ["api-vagas", "vagas", "1"]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Candidaturas",
+            "item": [
+                {
+                    "name": "Listar todas as candidaturas",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost/api-vagas/candidaturas",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "path": ["api-vagas", "candidaturas"]
+                        }
+                    }
+                },
+                {
+                    "name": "Listar candidaturas por vaga",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost/api-vagas/candidaturas/1",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "path": ["api-vagas", "candidaturas", "1"]
+                        }
+                    }
+                },
+                {
+                    "name": "Candidatar-se a uma vaga",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"vaga_id\": 1,\n    \"nome_candidato\": \"João Silva\",\n    \"email\": \"joao@email.com\",\n    \"telefone\": \"(11) 99999-9999\",\n    \"curriculo\": \"Experiência de 3 anos em desenvolvimento web...\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost/api-vagas/candidaturas",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "path": ["api-vagas", "candidaturas"]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Teste de Conexão",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "http://localhost/api-vagas/test.php",
+                    "protocol": "http",
+                    "host": ["localhost"],
+                    "path": ["api-vagas", "test.php"]
+                }
+            }
+        }
+    ]
+}
