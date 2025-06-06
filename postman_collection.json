@@ -1,0 +1,138 @@
+{
+	"info": {
+		"name": "API de Vagas",
+		"description": "Collection para testar a API de análise de candidaturas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Criar Vaga",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": \"c70fc483-4805-409f-919b-0e593d3feed7\",\n  \"empresa\": \"Teste Empresa\",\n  \"titulo\": \"Desenvolvedor PHP\",\n  \"descricao\": \"Desenvolvimento de APIs em PHP\",\n  \"localizacao\": \"A\",\n  \"nivel\": 3\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/vagas",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "8080",
+					"path": ["vagas"]
+				}
+			}
+		},
+		{
+			"name": "2. Criar Pessoa",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": \"d0f6d3c5-31b1-496d-b6a8-b45b30204366\",\n  \"nome\": \"João Silva\",\n  \"profissao\": \"Desenvolvedor PHP\",\n  \"localizacao\": \"C\",\n  \"nivel\": 2\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/pessoas",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "8080",
+					"path": ["pessoas"]
+				}
+			}
+		},
+		{
+			"name": "3. Criar Segunda Pessoa",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": \"e1f7e4d6-42c2-5a7e-c7b9-b56c40305477\",\n  \"nome\": \"Maria Santos\",\n  \"profissao\": \"Desenvolvedora Senior\",\n  \"localizacao\": \"A\",\n  \"nivel\": 4\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/pessoas",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "8080",
+					"path": ["pessoas"]
+				}
+			}
+		},
+		{
+			"name": "4. Criar Candidatura 1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": \"3ef0413f-f040-459a-9e22-3e8b471e6668\",\n  \"id_vaga\": \"c70fc483-4805-409f-919b-0e593d3feed7\",\n  \"id_pessoa\": \"d0f6d3c5-31b1-496d-b6a8-b45b30204366\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/candidaturas",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "8080",
+					"path": ["candidaturas"]
+				}
+			}
+		},
+		{
+			"name": "5. Criar Candidatura 2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": \"4fg0524g-g151-570b-a033-4f9c582f7779\",\n  \"id_vaga\": \"c70fc483-4805-409f-919b-0e593d3feed7\",\n  \"id_pessoa\": \"e1f7e4d6-42c2-5a7e-c7b9-b56c40305477\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/candidaturas",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "8080",
+					"path": ["candidaturas"]
+				}
+			}
+		},
+		{
+			"name": "6. Ver Ranking de Candidatos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/vagas/c70fc483-4805-409f-919b-0e593d3feed7/candidaturas/ranking",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "8080",
+					"path": ["vagas", "c70fc483-4805-409f-919b-0e593d3feed7", "candidaturas", "ranking"]
+				}
+			}
+		}
+	]
+}
