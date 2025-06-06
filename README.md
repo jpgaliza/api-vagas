@@ -1,240 +1,186 @@
 # API de Vagas
 
-Uma API RESTful para gerenciamento de vagas de emprego e candidaturas, desenvolvida em PHP com MySQL.
+API para análise de candidaturas de emprego, desenvolvida para ajudar recrutadores a identificar as pessoas mais adequadas para cada vaga.
 
-## ✅ Status Atual
+## Tecnologias Utilizadas
 
-**API FUNCIONANDO CORRETAMENTE!**
+- PHP 7.4+
+- Slim Framework 4.0
+- MySQL
+- Composer
 
-- ✅ Todas as operações CRUD para vagas implementadas
-- ✅ Sistema de candidaturas funcional
-- ✅ Validação de dados corrigida
-- ✅ Erros de referência PHP resolvidos
-- ✅ Testes de POST/GET validados
-- ✅ Interface de teste disponível
-
-**Última atualização**: 05/06/2025 - Problemas de validação e referência PHP corrigidos
-
-## 📋 Funcionalidades
-
-- **Gerenciamento de Vagas**
-
-  - Listar todas as vagas ativas
-  - Buscar vaga por ID
-  - Criar nova vaga
-  - Atualizar vaga existente
-  - Remover vaga (soft delete)
-
-- **Sistema de Candidaturas**
-  - Candidatar-se a uma vaga
-  - Listar candidaturas por vaga
-  - Listar todas as candidaturas
-  - Prevenção de candidaturas duplicadas
-
-## 🚀 Instalação e Configuração
+## Instalação
 
 ### Pré-requisitos
 
-- XAMPP (Apache + MySQL + PHP)
-- PHP 7.4 ou superior
-- MySQL 5.7 ou superior
+- XAMPP (PHP 7.4+ e MySQL)
+- Composer
 
-### Passo a passo
+### Passos para instalação
 
-1. **Clone ou copie os arquivos para a pasta do XAMPP**
-
-   ```
-   c:\xampp\htdocs\api-vagas\
-   ```
-
-2. **Inicie os serviços do XAMPP**
-
-   - Apache
-   - MySQL
-
-3. **Crie o banco de dados**
-
-   - Acesse o phpMyAdmin em `http://localhost/phpmyadmin`
-   - Execute o script SQL em `database/schema.sql`
-
-4. **Configure a conexão com o banco**
-   - Verifique as configurações em `config/database.php`
-   - Ajuste se necessário (usuário, senha, etc.)
-
-## 📚 Endpoints da API
-
-### Vagas
-
-#### Listar todas as vagas
-
-```http
-GET http://localhost/api-vagas/vagas
+1. Clone o repositório:
+```bash
+git clone <url-do-repositorio>
+cd api-vagas
 ```
 
-#### Buscar vaga por ID
-
-```http
-GET http://localhost/api-vagas/vagas/{id}
+2. Instale as dependências:
+```bash
+composer install
 ```
 
-#### Criar nova vaga
+3. Configure o banco de dados:
+   - Inicie o XAMPP
+   - Abra o phpMyAdmin
+   - Execute o script `database.sql` para criar o banco e as tabelas
 
-```http
-POST http://localhost/api-vagas/vagas
-Content-Type: application/json
+4. Configure o servidor web:
+   - Certifique-se de que o Apache está rodando no XAMPP
+   - A API estará disponível em: `http://localhost/api-vagas/public`
 
-{
-    "titulo": "Desenvolvedor PHP",
-    "descricao": "Desenvolvimento de aplicações web em PHP",
-    "empresa": "Empresa XYZ",
-    "localizacao": "São Paulo - SP",
-    "salario": 7000.00,
-    "tipo_contrato": "CLT",
-    "requisitos": "PHP, MySQL, HTML, CSS, JavaScript",
-    "beneficios": "Vale alimentação, Plano de saúde"
-}
-```
-
-#### Atualizar vaga
-
-```http
-PUT http://localhost/api-vagas/vagas/{id}
-Content-Type: application/json
-
-{
-    "titulo": "Desenvolvedor PHP Sênior",
-    "descricao": "Desenvolvimento de aplicações web complexas em PHP",
-    "empresa": "Empresa XYZ",
-    "localizacao": "São Paulo - SP",
-    "salario": 9000.00,
-    "tipo_contrato": "CLT",
-    "requisitos": "PHP avançado, MySQL, Laravel, Git",
-    "beneficios": "Vale alimentação, Plano de saúde, Vale transporte"
-}
-```
-
-#### Remover vaga
-
-```http
-DELETE http://localhost/api-vagas/vagas/{id}
-```
-
-### Candidaturas
-
-#### Listar todas as candidaturas
-
-```http
-GET http://localhost/api-vagas/candidaturas
-```
-
-#### Listar candidaturas por vaga
-
-```http
-GET http://localhost/api-vagas/candidaturas/{vaga_id}
-```
-
-#### Candidatar-se a uma vaga
-
-```http
-POST http://localhost/api-vagas/candidaturas
-Content-Type: application/json
-
-{
-    "vaga_id": 1,
-    "nome_candidato": "João Silva",
-    "email": "joao@email.com",
-    "telefone": "(11) 99999-9999",
-    "curriculo": "Experiência de 3 anos em desenvolvimento web..."
-}
-```
-
-## 🗄️ Estrutura do Banco de Dados
-
-### Tabela: vagas
-
-- `id` (INT, PRIMARY KEY, AUTO_INCREMENT)
-- `titulo` (VARCHAR(255), NOT NULL)
-- `descricao` (TEXT, NOT NULL)
-- `empresa` (VARCHAR(255), NOT NULL)
-- `localizacao` (VARCHAR(255))
-- `salario` (DECIMAL(10,2))
-- `tipo_contrato` (ENUM: 'CLT', 'PJ', 'Estágio', 'Temporário', 'Freelance')
-- `requisitos` (TEXT)
-- `beneficios` (TEXT)
-- `data_publicacao` (DATETIME, DEFAULT CURRENT_TIMESTAMP)
-- `status` (ENUM: 'ativa', 'inativa', 'pausada', DEFAULT 'ativa')
-
-### Tabela: candidaturas
-
-- `id` (INT, PRIMARY KEY, AUTO_INCREMENT)
-- `vaga_id` (INT, FOREIGN KEY)
-- `nome_candidato` (VARCHAR(255), NOT NULL)
-- `email` (VARCHAR(255), NOT NULL)
-- `telefone` (VARCHAR(20))
-- `curriculo` (TEXT)
-- `data_candidatura` (DATETIME, DEFAULT CURRENT_TIMESTAMP)
-- `status` (ENUM: 'pendente', 'em_analise', 'aprovado', 'rejeitado', DEFAULT 'pendente')
-
-## 📁 Estrutura do Projeto
+## Estrutura do Projeto
 
 ```
 api-vagas/
-├── index.php                  # Arquivo principal com roteamento
 ├── config/
-│   └── database.php          # Configuração do banco de dados
-├── classes/
-│   ├── Vaga.php             # Classe para gerenciar vagas
-│   └── Candidatura.php      # Classe para gerenciar candidaturas
-├── database/
-│   └── schema.sql           # Script SQL para criar o banco
-└── README.md                # Documentação
+│   └── database.php          # Configurações do banco
+├── public/
+│   ├── index.php            # Ponto de entrada da API
+│   └── .htaccess            # Configuração do Apache
+├── src/
+│   ├── Controllers/         # Controllers da API
+│   ├── Database/           # Conexão com banco
+│   ├── Models/             # Modelos de dados
+│   └── Utils/              # Utilitários (validação, cálculos)
+├── database.sql            # Script de criação do banco
+└── composer.json           # Dependências do projeto
 ```
 
-## 🔧 Testando a API
+## API Endpoints
 
-Você pode testar a API usando ferramentas como:
-
-- Postman
-- Insomnia
-- cURL
-- Ou qualquer cliente HTTP
-
-### Exemplo com cURL:
-
-```bash
-# Listar vagas
-curl -X GET http://localhost/api-vagas/vagas
-
-# Criar vaga
-curl -X POST http://localhost/api-vagas/vagas \
-  -H "Content-Type: application/json" \
-  -d '{
-    "titulo": "Desenvolvedor React",
-    "descricao": "Desenvolvimento frontend com React",
-    "empresa": "Tech Company"
-  }'
+### 1. Criar Vaga
+- **URL**: `POST /vagas`
+- **Content-Type**: `application/json`
+- **Body**:
+```json
+{
+  "id": "c70fc483-4805-409f-919b-0e593d3feed7",
+  "empresa": "Teste",
+  "titulo": "Vaga teste",
+  "descricao": "Criar os mais diferentes tipos de teste",
+  "localizacao": "A",
+  "nivel": 3
+}
 ```
+- **Respostas**:
+  - `201 Created`: Vaga criada com sucesso
+  - `400 Bad Request`: JSON inválido
+  - `422 Unprocessable Entity`: Dados inválidos
 
-## ⚠️ Validações Implementadas
+### 2. Criar Pessoa
+- **URL**: `POST /pessoas`
+- **Content-Type**: `application/json`
+- **Body**:
+```json
+{
+  "id": "d0f6d3c5-31b1-496d-b6a8-b45b30204366",
+  "nome": "John Doe",
+  "profissao": "Engenheiro de Software",
+  "localizacao": "C",
+  "nivel": 2
+}
+```
+- **Respostas**:
+  - `201 Created`: Pessoa criada com sucesso
+  - `400 Bad Request`: JSON inválido
+  - `422 Unprocessable Entity`: Dados inválidos
 
-- **Vagas**: Título, descrição e empresa são obrigatórios
-- **Candidaturas**: Vaga ID, nome e email são obrigatórios
-- **Duplicação**: Impede candidaturas duplicadas do mesmo email para a mesma vaga
-- **Status**: Apenas vagas ativas aparecem na listagem pública
+### 3. Criar Candidatura
+- **URL**: `POST /candidaturas`
+- **Content-Type**: `application/json`
+- **Body**:
+```json
+{
+  "id": "3ef0413f-f040-459a-9e22-3e8b471e6668",
+  "id_vaga": "c70fc483-4805-409f-919b-0e593d3feed7",
+  "id_pessoa": "d0f6d3c5-31b1-496d-b6a8-b45b30204366"
+}
+```
+- **Respostas**:
+  - `201 Created`: Candidatura criada com sucesso
+  - `400 Bad Request`: JSON inválido ou candidatura duplicada
+  - `404 Not Found`: Vaga ou pessoa não encontrada
 
-## 🛡️ Segurança
+### 4. Ranking de Candidatos
+- **URL**: `GET /vagas/{id}/candidaturas/ranking`
+- **Resposta**:
+```json
+[
+  {
+    "nome": "Mary Jane",
+    "profissao": "Engenheira de Software",
+    "localizacao": "A",
+    "nivel": 4,
+    "score": 87
+  },
+  {
+    "nome": "John Doe",
+    "profissao": "Engenheiro de Software",
+    "localizacao": "C",
+    "nivel": 2,
+    "score": 62
+  }
+]
+```
+- **Respostas**:
+  - `200 OK`: Lista de candidatos ordenada por score
+  - `404 Not Found`: Vaga não encontrada ou sem candidatos
 
-- Headers CORS configurados
-- Validação de dados de entrada
-- Prepared statements para prevenir SQL Injection
-- Soft delete para vagas (não remove permanentemente)
+## Especificações Técnicas
 
-## 📈 Possíveis Melhorias
+### Níveis de Experiência
+- 1: Estagiário
+- 2: Júnior
+- 3: Pleno
+- 4: Sênior
+- 5: Especialista
 
-- Autenticação e autorização
-- Paginação nos endpoints de listagem
-- Upload de arquivos para currículos
-- Sistema de notificações por email
-- Logs de auditoria
-- Rate limiting
-- Documentação com Swagger/OpenAPI
+### Localidades
+Representadas pelas letras A, B, C, D, E, F com as seguintes distâncias:
+- A ↔ B: 5
+- B ↔ C: 5
+- C ↔ D: 5
+- D ↔ E: 5
+- E ↔ F: 5
+
+### Cálculo de Score
+O score é calculado pela fórmula: `SCORE = (N + D) / 2`
+
+Onde:
+- `N = 100 - 25 × |NV - NC|`
+  - NV = nível da vaga
+  - NC = nível do candidato
+- `D` baseado na distância:
+  - 0-5: D = 100
+  - 5-10: D = 75
+  - 10-15: D = 50
+  - 15-20: D = 25
+  - >20: D = 0
+
+## Validações
+
+- Todos os IDs devem seguir o padrão UUID
+- Níveis devem estar entre 1 e 5
+- Localizações devem ser A, B, C, D, E ou F
+- Não é permitida duplicação de candidaturas
+- Campos obrigatórios devem estar preenchidos
+
+## Padrões de Design Utilizados
+
+- **Singleton**: Para conexão com banco de dados
+- **MVC**: Separação entre Models, Views e Controllers
+- **Repository Pattern**: Encapsulamento da lógica de acesso aos dados
+
+## Autor
+
+Desenvolvido seguindo as especificações técnicas fornecidas.
