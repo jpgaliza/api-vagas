@@ -18,14 +18,14 @@ class ScoreCalculator
     {
         // Calcular N
         $n = 100 - 25 * abs($nivelVaga - $nivelCandidato);
-        
+
         // Calcular D
         $distancia = self::getDistance($localizacaoVaga, $localizacaoCandidato);
         $d = self::getDistanceScore($distancia);
-        
+
         // Calcular Score final (apenas parte inteira)
         $score = intval(($n + $d) / 2);
-        
+
         return $score;
     }
 
@@ -34,7 +34,7 @@ class ScoreCalculator
         if (!isset(self::$distances[$loc1]) || !isset(self::$distances[$loc1][$loc2])) {
             return 999; // Distância muito alta para localização inválida
         }
-        
+
         return self::$distances[$loc1][$loc2];
     }
 

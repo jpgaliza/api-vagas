@@ -10,7 +10,6 @@ use PDO;
 class Candidatura
 {
     private $db;
-
     public function __construct()
     {
         $this->db = Database::getInstance()->getConnection();
@@ -18,16 +17,18 @@ class Candidatura
 
     public function create($data)
     {
-        // Validar campos obrigatórios
-        $requiredFields = ['id', 'id_vaga', 'id_pessoa'];
+        // Validar campos obrigatórios (id não é mais obrigatório pois é gerado automaticamente)
+        $requiredFields = ['id_vaga', 'id_pessoa'];
         if (!Validator::validateRequiredFields($data, $requiredFields)) {
             return false;
         }
 
-        // Validar UUIDs
-        if (!Validator::validateUUID($data['id']) || 
-            !Validator::validateUUID($data['id_vaga']) || 
-            !Validator::validateUUID($data['id_pessoa'])) {
+        // Validar UUIDs (id deve existir neste ponto)
+        if (
+            !isset($data['id']) || !Validator::validateUUID($data['id']) ||
+            !Validator::validateUUID($data['id_vaga']) ||
+            !Validator::validateUUID($data['id_pessoa'])
+        ) {
             return false;
         }
 
@@ -44,10 +45,10 @@ class Candidatura
         // Verificar se vaga e pessoa existem
         $vagaModel = new Vaga();
         $pessoaModel = new Pessoa();
-        
+
         $vaga = $vagaModel->findById($data['id_vaga']);
         $pessoa = $pessoaModel->findById($data['id_pessoa']);
-        
+
         if (!$vaga || !$pessoa) {
             return 'not_found';
         }
@@ -55,9 +56,9 @@ class Candidatura
         try {
             $sql = "INSERT INTO candidaturas (id, id_vaga, id_pessoa) 
                     VALUES (:id, :id_vaga, :id_pessoa)";
-            
+
             $stmt = $this->db->prepare($sql);
-            
+
             return $stmt->execute([
                 ':id' => $data['id'],
                 ':id_vaga' => $data['id_vaga'],
@@ -97,7 +98,7 @@ class Candidatura
                 INNER JOIN pessoas p ON c.id_pessoa = p.id
                 INNER JOIN vagas v ON c.id_vaga = v.id
                 WHERE c.id_vaga = :id_vaga";
-        
+
         $stmt = $this->db->prepare($sql);
         $stmt->execute([':id_vaga' => $idVaga]);
         $candidatos = $stmt->fetchAll();
@@ -115,13 +116,13 @@ class Candidatura
                 $candidato['localizacao']
             );
             $candidato['score'] = $score;
-            
+
             // Remover campos auxiliares
             unset($candidato['vaga_localizacao'], $candidato['vaga_nivel']);
         }
 
         // Ordenar por score decrescente
-        usort($candidatos, function($a, $b) {
+        usort($candidatos, function ($a, $b) {
             return $b['score'] <=> $a['score'];
         });
 

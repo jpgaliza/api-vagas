@@ -9,7 +9,6 @@ use PDO;
 class Vaga
 {
     private $db;
-
     public function __construct()
     {
         $this->db = Database::getInstance()->getConnection();
@@ -17,14 +16,14 @@ class Vaga
 
     public function create($data)
     {
-        // Validar campos obrigatórios
-        $requiredFields = ['id', 'empresa', 'titulo', 'localizacao', 'nivel'];
+        // Validar campos obrigatórios (id não é mais obrigatório pois é gerado automaticamente)
+        $requiredFields = ['empresa', 'titulo', 'localizacao', 'nivel'];
         if (!Validator::validateRequiredFields($data, $requiredFields)) {
             return false;
         }
 
-        // Validar UUID
-        if (!Validator::validateUUID($data['id'])) {
+        // Validar UUID (deve existir neste ponto)
+        if (!isset($data['id']) || !Validator::validateUUID($data['id'])) {
             return false;
         }
 
@@ -46,9 +45,9 @@ class Vaga
         try {
             $sql = "INSERT INTO vagas (id, empresa, titulo, descricao, localizacao, nivel) 
                     VALUES (:id, :empresa, :titulo, :descricao, :localizacao, :nivel)";
-            
+
             $stmt = $this->db->prepare($sql);
-            
+
             return $stmt->execute([
                 ':id' => $data['id'],
                 ':empresa' => $data['empresa'],

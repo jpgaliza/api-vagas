@@ -17,14 +17,14 @@ class Pessoa
 
     public function create($data)
     {
-        // Validar campos obrigatórios
-        $requiredFields = ['id', 'nome', 'profissao', 'localizacao', 'nivel'];
+        // Validar campos obrigatórios (id não é mais obrigatório pois é gerado automaticamente)
+        $requiredFields = ['nome', 'profissao', 'localizacao', 'nivel'];
         if (!Validator::validateRequiredFields($data, $requiredFields)) {
             return false;
         }
 
-        // Validar UUID
-        if (!Validator::validateUUID($data['id'])) {
+        // Validar UUID (deve existir neste ponto)
+        if (!isset($data['id']) || !Validator::validateUUID($data['id'])) {
             return false;
         }
 
@@ -46,9 +46,9 @@ class Pessoa
         try {
             $sql = "INSERT INTO pessoas (id, nome, profissao, localizacao, nivel) 
                     VALUES (:id, :nome, :profissao, :localizacao, :nivel)";
-            
+
             $stmt = $this->db->prepare($sql);
-            
+
             return $stmt->execute([
                 ':id' => $data['id'],
                 ':nome' => $data['nome'],
