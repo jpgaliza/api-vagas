@@ -1,10 +1,159 @@
 {
 	"info": {
-		"name": "API de Vagas",
-		"description": "Collection para testar a API de análise de candidaturas",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"_postman_id": "0bd3e1c8-d342-4eac-8a72-b2e0fbc5ab17",
+		"name": "API de Vagas - Teste Completo",
+		"description": "Collection para testar a API de análise de candidaturas com IDs obrigatórios",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "45582603"
 	},
 	"item": [
+		{
+			"name": "Criar Vaga FAP",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": \"62b02419-cf34-4bb9-862c-85b1388b8836\",\n  \"empresa\": \"UniFAP\",\n  \"titulo\": \"Analista de Dados\",\n  \"descricao\": \"Gerenciar os dados dos alunos da Faculdade\",\n  \"localizacao\": \"B\",\n  \"nivel\": 2\n}"
+				},
+				"url": "http://localhost:8000/vagas"
+			},
+			"response": []
+		},
+		{
+			"name": "Criar Davi",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"105fe712-9377-4944-bb42-7156a86a5fbc\",\r\n  \"nome\": \"Davi Reinaldo\",\r\n  \"profissao\": \"Analista de Dados\",\r\n  \"localizacao\": \"D\",\r\n  \"nivel\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/pessoas"
+			},
+			"response": []
+		},
+		{
+			"name": "Criar Nycolas",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"b24a6d62-7c52-4e1e-a825-86b1a4470647\",\r\n  \"nome\": \"Nycolas de Oliveira\",\r\n  \"profissao\": \"Tech Lead\",\r\n  \"localizacao\": \"A\",\r\n  \"nivel\": 4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/pessoas"
+			},
+			"response": []
+		},
+		{
+			"name": "Criar João Pedro",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"1ce2f78e-7ae6-45d6-8a42-1c4ffe9e6439\",\r\n  \"nome\": \"João Pedro Galiza\",\r\n  \"profissao\": \"Analista de Dados\",\r\n  \"localizacao\": \"B\",\r\n  \"nivel\": 3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/pessoas"
+			},
+			"response": []
+		},
+		{
+			"name": "Criar Candidatura Davi",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"5f0cfb1d-cdaa-4b0a-8a57-74b824dc7e78\",\r\n  \"id_vaga\": \"62b02419-cf34-4bb9-862c-85b1388b8836\",\r\n  \"id_pessoa\": \"105fe712-9377-4944-bb42-7156a86a5fbc\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/candidaturas"
+			},
+			"response": []
+		},
+		{
+			"name": "Criar Candidatura Nycolas",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"7c9cafdc-f7bf-4e97-85bf-c49663474a9f\",\r\n  \"id_vaga\": \"62b02419-cf34-4bb9-862c-85b1388b8836\",\r\n  \"id_pessoa\": \"b24a6d62-7c52-4e1e-a825-86b1a4470647\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/candidaturas"
+			},
+			"response": []
+		},
+		{
+			"name": "Criar Candidatura João Pedro",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"4688fc9a-9773-4dd8-a892-8e563459ac39\",\r\n  \"id_vaga\": \"62b02419-cf34-4bb9-862c-85b1388b8836\",\r\n  \"id_pessoa\": \"1ce2f78e-7ae6-45d6-8a42-1c4ffe9e6439\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/candidaturas"
+			},
+			"response": []
+		},
+		{
+			"name": "Ver Ranking de Candidaturas UniFAP",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/vagas/62b02419-cf34-4bb9-862c-85b1388b8836/candidaturas/ranking"
+			},
+			"response": []
+		},
 		{
 			"name": "1. Criar Vaga",
 			"request": {
@@ -17,19 +166,14 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"id\": \"c70fc483-4805-409f-919b-0e593d3feed7\",\n  \"empresa\": \"Teste Empresa\",\n  \"titulo\": \"Desenvolvedor PHP\",\n  \"descricao\": \"Desenvolvimento de APIs em PHP\",\n  \"localizacao\": \"A\",\n  \"nivel\": 3\n}"
+					"raw": "{\n  \"id\": \"c70fc483-4805-409f-919b-0e593d3feed7\",\n  \"empresa\": \"TechCorp Brasil\",\n  \"titulo\": \"Desenvolvedor PHP Sênior\",\n  \"descricao\": \"Desenvolvimento de APIs REST em PHP com Slim Framework\",\n  \"localizacao\": \"A\",\n  \"nivel\": 3\n}"
 				},
-				"url": {
-					"raw": "http://localhost:8080/vagas",
-					"protocol": "http",
-					"host": ["localhost"],
-					"port": "8080",
-					"path": ["vagas"]
-				}
-			}
+				"url": "http://localhost:8000/vagas"
+			},
+			"response": []
 		},
 		{
-			"name": "2. Criar Pessoa",
+			"name": "2. Criar Pessoa 1",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -40,19 +184,14 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"id\": \"d0f6d3c5-31b1-496d-b6a8-b45b30204366\",\n  \"nome\": \"João Silva\",\n  \"profissao\": \"Desenvolvedor PHP\",\n  \"localizacao\": \"C\",\n  \"nivel\": 2\n}"
+					"raw": "{\n  \"id\": \"d0f6d3c5-31b1-496d-b6a8-b45b30204366\",\n  \"nome\": \"João Silva\",\n  \"profissao\": \"Desenvolvedor PHP\",\n  \"localizacao\": \"B\",\n  \"nivel\": 2\n}"
 				},
-				"url": {
-					"raw": "http://localhost:8080/pessoas",
-					"protocol": "http",
-					"host": ["localhost"],
-					"port": "8080",
-					"path": ["pessoas"]
-				}
-			}
+				"url": "http://localhost:8000/pessoas"
+			},
+			"response": []
 		},
 		{
-			"name": "3. Criar Segunda Pessoa",
+			"name": "3. Criar Pessoa 2",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -65,17 +204,30 @@
 					"mode": "raw",
 					"raw": "{\n  \"id\": \"e1f7e4d6-42c2-5a7e-c7b9-b56c40305477\",\n  \"nome\": \"Maria Santos\",\n  \"profissao\": \"Desenvolvedora Senior\",\n  \"localizacao\": \"A\",\n  \"nivel\": 4\n}"
 				},
-				"url": {
-					"raw": "http://localhost:8080/pessoas",
-					"protocol": "http",
-					"host": ["localhost"],
-					"port": "8080",
-					"path": ["pessoas"]
-				}
-			}
+				"url": "http://localhost:8000/pessoas"
+			},
+			"response": []
 		},
 		{
-			"name": "4. Criar Candidatura 1",
+			"name": "4. Criar Pessoa 3",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": \"f2a8f5e7-53d3-6b8f-d8ca-c67d51406588\",\n  \"nome\": \"Carlos Oliveira\",\n  \"profissao\": \"Desenvolvedor Junior\",\n  \"localizacao\": \"F\",\n  \"nivel\": 1\n}"
+				},
+				"url": "http://localhost:8000/pessoas"
+			},
+			"response": []
+		},
+		{
+			"name": "5. Criar Candidatura 1 (João Silva)",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -88,17 +240,12 @@
 					"mode": "raw",
 					"raw": "{\n  \"id\": \"3ef0413f-f040-459a-9e22-3e8b471e6668\",\n  \"id_vaga\": \"c70fc483-4805-409f-919b-0e593d3feed7\",\n  \"id_pessoa\": \"d0f6d3c5-31b1-496d-b6a8-b45b30204366\"\n}"
 				},
-				"url": {
-					"raw": "http://localhost:8080/candidaturas",
-					"protocol": "http",
-					"host": ["localhost"],
-					"port": "8080",
-					"path": ["candidaturas"]
-				}
-			}
+				"url": "http://localhost:8000/candidaturas"
+			},
+			"response": []
 		},
 		{
-			"name": "5. Criar Candidatura 2",
+			"name": "6. Criar Candidatura 2 (Maria Santos)",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -109,30 +256,74 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"id\": \"4fg0524g-g151-570b-a033-4f9c582f7779\",\n  \"id_vaga\": \"c70fc483-4805-409f-919b-0e593d3feed7\",\n  \"id_pessoa\": \"e1f7e4d6-42c2-5a7e-c7b9-b56c40305477\"\n}"
+					"raw": "{\n  \"id\": \"4fa0524a-a151-570b-af33-4f9c582f7779\",\n  \"id_vaga\": \"c70fc483-4805-409f-919b-0e593d3feed7\",\n  \"id_pessoa\": \"e1f7e4d6-42c2-5a7e-c7b9-b56c40305477\"\n}"
 				},
-				"url": {
-					"raw": "http://localhost:8080/candidaturas",
-					"protocol": "http",
-					"host": ["localhost"],
-					"port": "8080",
-					"path": ["candidaturas"]
-				}
-			}
+				"url": "http://localhost:8000/candidaturas"
+			},
+			"response": []
 		},
 		{
-			"name": "6. Ver Ranking de Candidatos",
+			"name": "7. Criar Candidatura 3 (Carlos Oliveira)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": \"5ab1635a-a262-681c-ba44-5a0d693a8880\",\n  \"id_vaga\": \"c70fc483-4805-409f-919b-0e593d3feed7\",\n  \"id_pessoa\": \"f2a8f5e7-53d3-6b8f-d8ca-c67d51406588\"\n}"
+				},
+				"url": "http://localhost:8000/candidaturas"
+			},
+			"response": []
+		},
+		{
+			"name": "8. Ver Ranking de Candidatos",
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/vagas/c70fc483-4805-409f-919b-0e593d3feed7/candidaturas/ranking",
-					"protocol": "http",
-					"host": ["localhost"],
-					"port": "8080",
-					"path": ["vagas", "c70fc483-4805-409f-919b-0e593d3feed7", "candidaturas", "ranking"]
-				}
-			}
+				"url": "http://localhost:8000/vagas/c70fc483-4805-409f-919b-0e593d3feed7/candidaturas/ranking"
+			},
+			"response": []
+		},
+		{
+			"name": "9. Teste - Criar Vaga sem ID (deve falhar)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"empresa\": \"Empresa Teste\",\n  \"titulo\": \"Desenvolvedor\",\n  \"descricao\": \"Teste sem ID\",\n  \"localizacao\": \"B\",\n  \"nivel\": 2\n}"
+				},
+				"url": "http://localhost:8000/vagas"
+			},
+			"response": []
+		},
+		{
+			"name": "10. Teste - Criar Pessoa sem ID (deve falhar)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nome\": \"Teste Sem ID\",\n  \"profissao\": \"Testador\",\n  \"localizacao\": \"C\",\n  \"nivel\": 3\n}"
+				},
+				"url": "http://localhost:8000/pessoas"
+			},
+			"response": []
 		}
 	]
 }

@@ -14,18 +14,17 @@ class Candidatura
     {
         $this->db = Database::getInstance()->getConnection();
     }
-
     public function create($data)
     {
-        // Validar campos obrigatórios (id não é mais obrigatório pois é gerado automaticamente)
-        $requiredFields = ['id_vaga', 'id_pessoa'];
+        // Validar campos obrigatórios
+        $requiredFields = ['id', 'id_vaga', 'id_pessoa'];
         if (!Validator::validateRequiredFields($data, $requiredFields)) {
             return false;
         }
 
-        // Validar UUIDs (id deve existir neste ponto)
+        // Validar UUIDs
         if (
-            !isset($data['id']) || !Validator::validateUUID($data['id']) ||
+            !Validator::validateUUID($data['id']) ||
             !Validator::validateUUID($data['id_vaga']) ||
             !Validator::validateUUID($data['id_pessoa'])
         ) {

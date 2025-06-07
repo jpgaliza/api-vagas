@@ -13,17 +13,16 @@ class Vaga
     {
         $this->db = Database::getInstance()->getConnection();
     }
-
     public function create($data)
     {
-        // Validar campos obrigatórios (id não é mais obrigatório pois é gerado automaticamente)
-        $requiredFields = ['empresa', 'titulo', 'localizacao', 'nivel'];
+        // Validar campos obrigatórios
+        $requiredFields = ['id', 'empresa', 'titulo', 'localizacao', 'nivel'];
         if (!Validator::validateRequiredFields($data, $requiredFields)) {
             return false;
         }
 
-        // Validar UUID (deve existir neste ponto)
-        if (!isset($data['id']) || !Validator::validateUUID($data['id'])) {
+        // Validar UUID
+        if (!Validator::validateUUID($data['id'])) {
             return false;
         }
 
