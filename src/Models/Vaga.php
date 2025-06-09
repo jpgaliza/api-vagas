@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Models;
-
 use App\Database\Database;
 use App\Utils\Validator;
 use PDO;
