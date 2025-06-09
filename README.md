@@ -6,13 +6,6 @@ Esta API foi desenvolvida como **Atividade de Verificação Prática 2 (AVP2)** 
 
 A API tem como objetivo analisar candidaturas de emprego e ajudar recrutadores a identificar as pessoas mais adequadas para cada vaga através de um sistema de pontuação baseado em critérios de localização e nível de experiência.
 
-## 🎯 Objetivos da AVP2
-
-- Implementar uma API REST completa usando PHP e Slim Framework
-- Aplicar padrões de design (Singleton, MVC, Repository Pattern)
-- Trabalhar com validações de dados e tratamento de erros
-- Implementar algoritmo de ranking personalizado
-- Demonstrar conhecimentos em estruturação de projetos PHP
 
 ## 🚀 Tecnologias Utilizadas
 
@@ -421,7 +414,7 @@ Onde:
 
 - **Resposta Esperada**: `201 Created`
 
-#### 2. Criar Primeira Pessoa (POST /pessoas)
+#### 2. Criar Pessoa (POST /pessoas)
 
 - **URL**: `http://localhost:8080/pessoas`
 - **Method**: POST
@@ -440,24 +433,6 @@ Onde:
 
 - **Resposta Esperada**: `201 Created`
 
-#### 3. Criar Segunda Pessoa (POST /pessoas)
-
-- **URL**: `http://localhost:8080/pessoas`
-- **Method**: POST
-- **Headers**: `Content-Type: application/json`
-- **Body**:
-
-```json
-{
-  "id": "e1f7e4d6-42c2-5a7e-c7b9-b56c40305477",
-  "nome": "Maria Santos",
-  "profissao": "Desenvolvedora Senior",
-  "localizacao": "A",
-  "nivel": 4
-}
-```
-
-- **Resposta Esperada**: `201 Created`
 
 #### 4. Criar Primeira Candidatura (POST /candidaturas)
 
@@ -476,22 +451,6 @@ Onde:
 
 - **Resposta Esperada**: `201 Created`
 
-#### 5. Criar Segunda Candidatura (POST /candidaturas)
-
-- **URL**: `http://localhost:8080/candidaturas`
-- **Method**: POST
-- **Headers**: `Content-Type: application/json`
-- **Body**:
-
-```json
-{
-  "id": "4fg0524g-g151-570b-a033-4f9c582f7779",
-  "id_vaga": "c70fc483-4805-409f-919b-0e593d3feed7",
-  "id_pessoa": "e1f7e4d6-42c2-5a7e-c7b9-b56c40305477"
-}
-```
-
-- **Resposta Esperada**: `201 Created`
 
 #### 6. Ver Ranking de Candidatos (GET /vagas/{id}/candidaturas/ranking)
 
@@ -501,13 +460,6 @@ Onde:
 
 ```json
 [
-  {
-    "nome": "Maria Santos",
-    "profissao": "Desenvolvedora Senior",
-    "localizacao": "A",
-    "nivel": 4,
-    "score": 87
-  },
   {
     "nome": "João Silva",
     "profissao": "Desenvolvedor PHP",
@@ -550,25 +502,12 @@ Para a vaga (nível 3, localização A) e candidatos:
    - Distância A→C = 10, então D = 75
    - Score = (75 + 75) / 2 = 75
 
-2. **Maria Santos** (nível 4, localização A):
-   - N = 100 - 25 × |3-4| = 75
-   - Distância A→A = 0, então D = 100
-   - Score = (75 + 100) / 2 = 87
-
-## Estrutura de Commits
-
-O projeto possui 5 commits conforme solicitado:
-
-1. Estrutura inicial do projeto e configuração do banco de dados
-2. Endpoint POST /pessoas - Receber Pessoas implementado
-3. Endpoint POST /candidaturas - Receber Candidaturas implementado
-4. Endpoint GET /vagas/{id}/candidaturas/ranking - Ranking de candidatos implementado
-5. Documentação e instruções finais do projeto
 
 ## Autores
 
 - [**João Pedro**](https://github.com/jpgaliza)
-- [**Nycolas**](https://github.com/jpgaliza)
+- [**Nycolas**](https://github.com/Nycolasfap)
 - [**Theo Natan**](https://github.com/theonatangoes)
-- [**Davi Reinaldo**](https://github.com/Nycolasfap)
-Desenvolvido seguindo as especificações técnicas fornecidas pelo Professor da Disciplina.
+- [**Davi Reinaldo**](https://github.com/davireinaldo)
+
+  Desenvolvido seguindo as especificações técnicas fornecidas pelo Professor da Disciplina.
