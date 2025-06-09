@@ -28,15 +28,13 @@ class Vaga
         // Validar nível
         if (!Validator::validateLevel($data['nivel'])) {
             return false;
-        }
-
-        // Validar localização
+        }        // Validar localização
         if (!Validator::validateLocation($data['localizacao'])) {
             return false;
         }
 
-        // Verificar se ID já existe
-        if ($this->exists($data['id'])) {
+        // Verificar se ID já existe globalmente (em qualquer tabela)
+        if (!Validator::isIdGloballyUnique($data['id'])) {
             return false;
         }
 

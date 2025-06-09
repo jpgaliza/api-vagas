@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Utils;
+use App\Database\Database;
 
 class Validator
 {
@@ -27,5 +28,36 @@ class Validator
             }
         }
         return true;
+    }
+
+    public static function isIdGloballyUnique($id)
+    {
+        $db = Database::getInstance()->getConnection();
+
+        // Verificar se ID existe na tabela vagas
+        $sql = "SELECT COUNT(*) FROM vagas WHERE id = :id";
+        $stmt = $db->prepare($sql);
+        $stmt->execute([':id' => $id]);
+        if ($stmt->fetchColumn() > 0) {
+            return false;
+        }
+
+        // Verificar se ID existe na tabela pessoas
+        $sql = "SELECT COUNT(*) FROM pessoas WHERE id = :id";
+        $stmt = $db->prepare($sql);
+        $stmt->execute([':id' => $id]);
+        if ($stmt->fetchColumn() > 0) {
+            return false;
+        }
+
+        // Verificar se ID existe na tabela candidaturas
+        $sql = "SELECT COUNT(*) FROM candidaturas WHERE id = :id";
+        $stmt = $db->prepare($sql);
+        $stmt->execute([':id' => $id]);
+        if ($stmt->fetchColumn() > 0) {
+            return false;
+        }
+
+        return true; // ID é único globalmente
     }
 }

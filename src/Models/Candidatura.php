@@ -29,10 +29,8 @@ class Candidatura
             !Validator::validateUUID($data['id_pessoa'])
         ) {
             return false;
-        }
-
-        // Verificar se ID já existe
-        if ($this->exists($data['id'])) {
+        }        // Verificar se ID já existe globalmente (em qualquer tabela)
+        if (!Validator::isIdGloballyUnique($data['id'])) {
             return false;
         }
 
